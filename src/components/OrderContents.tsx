@@ -1,6 +1,6 @@
 import { formatCurrency } from "../helpers"
 import { OrderActions } from "../reducers/order-reducer"
-import type { MenuItem, OrderItem } from "../types"
+import type { OrderItem } from "../types"
 
 type OrderContentsProps = {
     order: OrderItem[]
