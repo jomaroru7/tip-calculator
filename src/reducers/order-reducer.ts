@@ -23,20 +23,36 @@ export const orderReducer = (
 
     switch (action.type) {
         case 'add-item':
+            let order : OrderItem[] = []
+            const itemExist = state.order.find(orderItem => orderItem.id === action.payload.item.id)
+
+            if (itemExist) {
+                order = state.order.map(orderItem => orderItem.id === action.payload.item.id ? { ...orderItem, quantity: orderItem.quantity + 1 } : orderItem)
+
+            } else {
+                const newItem: OrderItem = { ...action.payload.item, quantity: 1 }
+                order = [...state.order, newItem]
+            }
             return {
-                ...state
+                ...state,
+                order
             }
         case "remove-item":
             return {
-                ...state
+                ...state,
+                order: state.order.filter(orderItem => orderItem.id !== action.payload.id)
             }
         case "place-order":
             return {
-                ...state
+                ...state,
+                order: [],
+                tip: 0
             }
         case "add-tip":
+            const tip = action.payload.value
             return {
-                ...state
+                ...state,
+                tip
             }
 
 
